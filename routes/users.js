@@ -19,15 +19,26 @@ router.get('/', function(req, res, next) {
 * }
 */
 router.post('/login', respondToLoginPost);
+router.post('/generateOTP', respondToGenerateOTP);
 
 function respondToLoginPost (req, res) {
   apiController.doLogin(req.body)
       .then(function (loginData) {
         httpUtils.sendResponseData(req, res, loginData);
       }).catch(function (err) {
-      httpUtils.sendResponseData(err);
-  })
+      httpUtils.sendServerErrorResponse(req, res, err);
+  });
 
 };
+
+function respondToGenerateOTP(req, res) {
+    apiController.generateOTP(req.body)
+        .then(function (otpData) {
+            httpUtils.sendResponseData(req, res, otpData);
+        }).catch(function (err) {
+        httpUtils.sendServerErrorResponse(req, res, err);
+    });
+
+}
 
 module.exports = router;
