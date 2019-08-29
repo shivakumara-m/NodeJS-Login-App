@@ -28,7 +28,6 @@ function respondToLoginPost (req, res) {
       }).catch(function (err) {
       httpUtils.sendServerErrorResponse(req, res, err);
   });
-
 };
 
 function respondToGenerateOTP(req, res) {
