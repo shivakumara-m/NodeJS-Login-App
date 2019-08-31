@@ -36,7 +36,18 @@ ngApp.config(function ($stateProvider, $urlRouterProvider) {
                 mobilOTPLoginView: {
                     templateUrl: '/views/login-otp.html',
                 }
-            }
+            },
+        },
+        home = {
+            access: {
+                requiredLogin: false
+            },
+            url: '/home',
+            views: {
+                homeView: {
+                    templateUrl: '/views/home.html',
+                }
+            },
         }
     ;
 
@@ -44,6 +55,6 @@ ngApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('login', login)
         .state('login.email',loginEmail)
         .state('login.otp', loginOTP)
-
+        .state('login.home', home)
     ;
 });

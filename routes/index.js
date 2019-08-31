@@ -7,6 +7,7 @@ router.get('/', getMainPage);
 
 function getMainPage(req, res) {
   console.debug('Route for mainViewpage: ' + __dirname );
+  console.log(process.env);
   var mainViewFile = __dirname + '/../public/views/main-view.html';
   console.log('mainView log' , mainViewFile);
   fs.readFile(mainViewFile, function (err, html) {

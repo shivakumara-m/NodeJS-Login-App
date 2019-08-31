@@ -4,15 +4,20 @@
  * Module dependencies.
  */
 
-var app = require('../app');
 var debug = require('debug')('nodeapptest:server');
 var http = require('http');
+global.env = process.env;
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '4000');
+console.log('APP BEGIN');
+console.log(process.env.DATABASE_URL, " DATABASE_URL   ");
+global.DATABASE_URL = process.env.DATABASE_URL;
+global.BACKEND_SERVER = process.env.BACKEND_SERVER;
+var app = require('../app');
 app.set('port', port);
 
 /**

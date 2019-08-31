@@ -6,6 +6,8 @@ ngApp.controller('loginPageCtrl', ['$window', '$scope', '$rootScope', '$state', 
         $state.go('login.email');
         $scope.otpGenerated = false;
         var timer = null;
+        $scope.invalidCredential = false;
+        $scope.invalidOtp = false;
         $scope.loginWithEmail = function (email, password) {
             var postData={
                 "email": email,
@@ -16,17 +18,16 @@ ngApp.controller('loginPageCtrl', ['$window', '$scope', '$rootScope', '$state', 
             httpService.userLogin(postData)
                 .then(function (success) {
                 console.log("Login successful " +$scope.username);
-                alert('login success: Now go to home page')
+                    $scope.invalidCredential = false;
+                    $state.go('login.home');
 
             }).catch(function (error) {
+                $scope.invalidCredential = true;
                 console.log(" login failed" + error);
-                alert('login failure:')
-
             });
         };
 
         $scope.loginWithOTP = function (number, otp) {
-
             if(timer) {
                 $interval.cancel(timer);
             }
@@ -39,17 +40,19 @@ ngApp.controller('loginPageCtrl', ['$window', '$scope', '$rootScope', '$state', 
             httpService.userLogin(postData)
                 .then(function (success) {
                     console.log("Login successful " +$scope.username);
-                    alert('login success: Now go to home page')
+                    $scope.resetUI();
+                    $state.go('login.home');
 
                 }).catch(function (error) {
-                console.log(" login failed" + error);
-                alert('login failure:')
+                //console.log(" login failed" + error);
+                $scope.invalidOtp = true;
+                //alert('login failure:')
 
             });
         };
 
         $scope.generateOTP = function (mobileNumber) {
-
+            $scope.invalidOtp = false;
             $scope.userMobileNum = mobileNumber;
             var postData = {
                 "userTelNumber": mobileNumber
@@ -57,7 +60,7 @@ ngApp.controller('loginPageCtrl', ['$window', '$scope', '$rootScope', '$state', 
 
             httpService.generateOTP(postData)
                 .then(function (success) {
-                    $scope.timeRemaining = 10;
+                    $scope.timeRemaining = 180;
                     $scope.otpGenerated = true;
                     timer = $interval(function () {
                         $scope.timeRemaining--;
@@ -71,7 +74,6 @@ ngApp.controller('loginPageCtrl', ['$window', '$scope', '$rootScope', '$state', 
                 }).catch(function (error) {
                 $scope.otpGenerated = false;
                 alert('login failure:')
-
             });
         };
 

@@ -1,7 +1,7 @@
 
 CREATE TABLE users
 (
-    id SERIAL integer ,
+    id SERIAL  ,
     username text COLLATE pg_catalog."default" NOT NULL,
     emailid text COLLATE pg_catalog."default",
     phone text COLLATE pg_catalog."default",
@@ -17,17 +17,23 @@ CREATE TABLE users
 WITH (
     OIDS = FALSE
 )
-TABLESPACE pg_default;
+;
 
 CREATE INDEX "email_index"
-    ON public.users USING btree
+    ON users USING btree
     (emailid COLLATE pg_catalog."default")
     TABLESPACE pg_default;
 
     CREATE INDEX "phone_index"
-    ON public.users USING btree
+    ON users USING btree
     (phone COLLATE pg_catalog."default")
     TABLESPACE pg_default;
+
+insert into users(username, emailid, phone, passwordhash, status, userinfo, created, updated)
+values ('shiva','shiva@us.com', '123', '65c23a931186dd9e8b0f46832e632c287dc28322', '1','{}', '2019-08-31 07:12:17.552+05:30', '2019-08-31 07:12:17.552+05:30');
+
+insert into users(username, emailid, phone, passwordhash, status, userinfo, created, updated)
+values ('kumar','kumar@us.com', '456', '65c23a931186dd9e8b0f46832e632c287dc28322', '1','{}', '2019-08-31 07:12:17.552+05:30', '2019-08-31 07:12:17.552+05:30');
 
 
 
