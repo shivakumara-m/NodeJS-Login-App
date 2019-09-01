@@ -24,4 +24,6 @@ services:
       POSTGRES_PASSWORD: admin123
       POSTGRES_USER: admin
       POSTGRES_DB: logindb
+      TWILIO_ACC_ID: twilioSID
+      TWILIO_TOKEN: twilioToken
 
