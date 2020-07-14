@@ -1,6 +1,6 @@
 # NodeJS Login App
 
-Demo Express-Node app with api to create login flow. Login can be done via pre created username/password combination or via mobile number and OTP.
+Demo Express-Node app, with apis to create login flow. Login can be done via pre created username/password combination or via mobile number and OTP.
 The nodejs server in one docker container communicates to  postgres server running in another docker container.
 The postgres db is prepopulated with a user email "shiva@us.com" and password "shiva123" for testing 
 
